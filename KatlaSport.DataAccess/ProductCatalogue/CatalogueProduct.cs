@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using KatlaSport.DataAccess.ProductStore;
 
 namespace KatlaSport.DataAccess.ProductCatalogue
