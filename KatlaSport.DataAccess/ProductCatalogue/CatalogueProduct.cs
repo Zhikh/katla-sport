@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using KatlaSport.DataAccess.ProductStore;
 
 namespace KatlaSport.DataAccess.ProductCatalogue
@@ -24,7 +25,20 @@ namespace KatlaSport.DataAccess.ProductCatalogue
         /// </summary>
         public string Code { get; set; }
 
-        // TODO STEP 2 - Add "Description, ManufacturerCode and Price" properties here.
+        /// <summary>
+        /// Gets or sets a product description.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets a product manufacturer code.
+        /// </summary>
+        public string ManufacturerCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets a product price.
+        /// </summary>
+        public decimal Price { get; set; }
 
         /// <summary>
         /// Gets or sets an ID for the product category the product belongs to.
