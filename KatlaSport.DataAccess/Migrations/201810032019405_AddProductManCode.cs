@@ -2,6 +2,9 @@ namespace KatlaSport.DataAccess.Migrations
 {
     using System.Data.Entity.Migrations;
 
+    /// <summary>
+    /// Adding column for dbo.catalogue_products
+    /// </summary>
     public partial class AddProductManCode : DbMigration
     {
         public override void Up()
