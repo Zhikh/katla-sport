@@ -36,7 +36,7 @@ namespace KatlaSport.Services.HiveManagement
 
             foreach (HiveListItem hive in hives)
             {
-                hive.HiveSectionCount = _context.Sections.Where(s => s.StoreHiveId == hive.Id).Count();
+                hive.HiveSectionCount = _context.Sections.Where(h => h.StoreHiveId == hive.Id).Count();
             }
 
             return hives;
@@ -76,7 +76,7 @@ namespace KatlaSport.Services.HiveManagement
         /// <inheritdoc/>
         public async Task<Hive> UpdateHiveAsync(int hiveId, UpdateHiveRequest updateRequest)
         {
-            var dbHives = await _context.Hives.Where(p => p.Code == updateRequest.Code && p.Id != hiveId).ToArrayAsync();
+            var dbHives = await _context.Hives.Where(h => h.Code == updateRequest.Code && h.Id != hiveId).ToArrayAsync();
             if (dbHives.Length > 0)
             {
                 throw new RequestedResourceHasConflictException("code");
@@ -101,7 +101,7 @@ namespace KatlaSport.Services.HiveManagement
         /// <inheritdoc/>
         public async Task DeleteHiveAsync(int hiveId)
         {
-            var dbHives = await _context.Hives.Where(p => p.Id == hiveId).ToArrayAsync();
+            var dbHives = await _context.Hives.Where(h => h.Id == hiveId).ToArrayAsync();
             if (dbHives.Length == 0)
             {
                 throw new RequestedResourceNotFoundException();
@@ -120,7 +120,21 @@ namespace KatlaSport.Services.HiveManagement
         /// <inheritdoc/>
         public async Task SetStatusAsync(int hiveId, bool deletedStatus)
         {
-            throw new NotImplementedException();
+            var dbHives = await _context.Hives.Where(h => h.Id == hiveId).ToArrayAsync();
+
+            if (dbHives.Length == 0)
+            {
+                throw new RequestedResourceNotFoundException();
+            }
+
+            var dbHive = dbHives[0];
+            if (dbHive.IsDeleted != deletedStatus)
+            {
+                dbHive.IsDeleted = deletedStatus;
+                dbHive.LastUpdated = DateTime.UtcNow;
+                dbHive.LastUpdatedBy = _userContext.UserId;
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
