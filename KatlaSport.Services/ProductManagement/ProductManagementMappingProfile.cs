@@ -1,10 +1,12 @@
-﻿using System;
-using AutoMapper;
-using DataAccessProduct = KatlaSport.DataAccess.ProductCatalogue.CatalogueProduct;
-using DataAccessProductCategory = KatlaSport.DataAccess.ProductCatalogue.ProductCategory;
-
-namespace KatlaSport.Services.ProductManagement
+﻿namespace KatlaSport.Services.ProductManagement
 {
+    using System;
+    using AutoMapper;
+    using KatlaSport.Services.HiveManagement;
+    using DataAccessHive = KatlaSport.DataAccess.ProductStoreHive.StoreHive;
+    using DataAccessProduct = KatlaSport.DataAccess.ProductCatalogue.CatalogueProduct;
+    using DataAccessProductCategory = KatlaSport.DataAccess.ProductCatalogue.ProductCategory;
+
     public sealed class ProductManagementMappingProfile : Profile
     {
         public ProductManagementMappingProfile()
@@ -24,6 +26,9 @@ namespace KatlaSport.Services.ProductManagement
                 .ForMember(r => r.LastUpdated, opt => opt.MapFrom(p => DateTime.UtcNow));
 
             CreateMap<UpdateProductRequest, DataAccessProduct>()
+                .ForMember(r => r.LastUpdated, opt => opt.MapFrom(p => DateTime.UtcNow));
+
+            CreateMap<UpdateHiveRequest, DataAccessHive>()
                 .ForMember(r => r.LastUpdated, opt => opt.MapFrom(p => DateTime.UtcNow));
         }
     }

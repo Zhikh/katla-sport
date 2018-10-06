@@ -28,9 +28,9 @@ namespace KatlaSport.Services.ProductManagement
         /// </summary>
         public string Description { get; set; }
 
-        ///// <summary>
-        ///// Gets or sets a product manufacturer code.
-        ///// </summary>
+        /// <summary>
+        /// Gets or sets a product manufacturer code.
+        /// </summary>
         public string ManufacturerCode { get; set; }
 
         /// <summary>
