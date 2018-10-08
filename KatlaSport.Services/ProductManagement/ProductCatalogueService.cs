@@ -119,7 +119,7 @@ namespace KatlaSport.Services.ProductManagement
             }
 
             var product = products[0];
-            if (product.IsDeleted == true)
+            if (product.IsDeleted == false)
             {
                 throw new RequestedResourceHasConflictException();
             }
