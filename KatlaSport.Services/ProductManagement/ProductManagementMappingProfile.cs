@@ -2,8 +2,6 @@
 {
     using System;
     using AutoMapper;
-    using KatlaSport.Services.HiveManagement;
-    using DataAccessHive = KatlaSport.DataAccess.ProductStoreHive.StoreHive;
     using DataAccessProduct = KatlaSport.DataAccess.ProductCatalogue.CatalogueProduct;
     using DataAccessProductCategory = KatlaSport.DataAccess.ProductCatalogue.ProductCategory;
 
@@ -26,9 +24,6 @@
                 .ForMember(r => r.LastUpdated, opt => opt.MapFrom(p => DateTime.UtcNow));
 
             CreateMap<UpdateProductRequest, DataAccessProduct>()
-                .ForMember(r => r.LastUpdated, opt => opt.MapFrom(p => DateTime.UtcNow));
-
-            CreateMap<UpdateHiveRequest, DataAccessHive>()
                 .ForMember(r => r.LastUpdated, opt => opt.MapFrom(p => DateTime.UtcNow));
         }
     }

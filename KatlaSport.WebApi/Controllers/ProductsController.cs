@@ -101,6 +101,7 @@ namespace KatlaSport.WebApi.Controllers
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
         public async Task<IHttpActionResult> DeleteProduct([FromUri] int id)
         {
+            await _productService.SetStatusAsync(id, true);
             await _productService.DeleteProductAsync(id);
             return ResponseMessage(Request.CreateResponse(HttpStatusCode.NoContent));
         }
